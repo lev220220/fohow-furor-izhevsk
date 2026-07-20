@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:ital,wght@0,300..800;1,300..800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Палитра «Светлый мудборд FOHOW»: фарфор, нефрит, имперское золото */
+    --background: 40 33% 95%;          /* #F7F4EE фарфор */
+    --foreground: 160 33% 11%;         /* #0F2E24 чернильный зелёный */
+    --card: 0 0% 100%;
+    --card-foreground: 160 33% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 33% 11%;
+    --primary: 160 59% 24%;            /* #1E5B46 глубокий нефрит */
+    --primary-foreground: 40 33% 97%;
+    --secondary: 120 14% 91%;          /* #E6ECE6 светлый блок */
+    --secondary-foreground: 160 33% 11%;
+    --muted: 120 14% 91%;
+    --muted-foreground: 160 10% 38%;
+    --accent: 45 65% 51%;              /* #D4AF37 имперское золото */
+    --accent-foreground: 160 33% 11%;
+    --destructive: 4 66% 47%;          /* #C7362B киноварь */
+    --destructive-foreground: 0 0% 98%;
+    --border: 120 10% 84%;
+    --input: 120 10% 84%;
+    --ring: 160 59% 24%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+@layer utilities {
+  .text-jade { color: #1E5B46; }
+  .text-gold { color: #B8912A; }
+  .text-cinnabar { color: #C7362B; }
+  .text-oxygen { color: #2E8FD8; }
+  .text-ink { color: #0F2E24; }
+  .bg-jade { background-color: #1E5B46; }
+  .bg-gold { background-color: #D4AF37; }
+  .bg-porcelain { background-color: #F7F4EE; }
+  .bg-mint { background-color: #E6ECE6; }
+  .bg-sage { background-color: #C9D6C9; }
+  .bg-cinnabar { background-color: #C7362B; }
+  .bg-ink { background-color: #0F2E24; }
+  .border-gold { border-color: #D4AF37; }
+  .border-jade { border-color: #1E5B46; }
+  .gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #F1D878 45%, #B8912A 100%);
+  }
+  .jade-gradient {
+    background: linear-gradient(135deg, #1E5B46 0%, #2A7560 60%, #143B2D 100%);
+  }
+  .hero-vignette {
+    background: linear-gradient(90deg, rgba(247,244,238,0.97) 0%, rgba(247,244,238,0.85) 42%, rgba(247,244,238,0.25) 75%, rgba(247,244,238,0) 100%);
+  }
+  @media (max-width: 768px) {
+    .hero-vignette {
+      background: linear-gradient(180deg, rgba(247,244,238,0.62) 0%, rgba(247,244,238,0.94) 50%, rgba(247,244,238,0.98) 100%);
+    }
+  }
+  .ornament-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37 20%, #D4AF37 80%, transparent);
+  }
+  .chinese-corner {
+    position: relative;
+  }
+  .chinese-corner::before, .chinese-corner::after {
+    content: '';
+    position: absolute;
+    width: 26px; height: 26px;
+    border-color: #D4AF37;
+    border-style: solid;
+  }
+  .chinese-corner::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+  .chinese-corner::after { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+}
+
+/* ===== Защита контента от копирования (Маркетинг-зона / База знаний) ===== */
+.protected-zone {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  position: relative;
+}
+.protected-zone img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+.watermark-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+  opacity: 0.07;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: space-around;
+  transform: rotate(-18deg) scale(1.4);
+  font-size: 15px;
+  font-weight: 600;
+  color: #1E5B46;
+  white-space: nowrap;
+}
+@media print {
+  .protected-zone, .protected-zone * { display: none !important; }
+  body::before {
+    content: 'Печать материалов закрытой зоны запрещена правилами представительства «ФУРОР».';
+    display: block; padding: 40px; font-size: 20px;
+  }
+}
+
+/* Плавные появления */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.7s ease both; }
+.fade-up-1 { animation: fadeUp 0.7s 0.1s ease both; }
+.fade-up-2 { animation: fadeUp 0.7s 0.2s ease both; }
+.fade-up-3 { animation: fadeUp 0.7s 0.3s ease both; }
+
+html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #E6ECE6; }
+::-webkit-scrollbar-thumb { background: #1E5B46; border-radius: 5px; }
